@@ -77,5 +77,10 @@
                 </exclusion>
             </exclusions>
         </dependency>
+        <dependency>
+	        <groupId>com.xinyue.micromall</groupId>
+	    	<artifactId>micro-mall-spi</artifactId>
+	    	<version>0.0.1-SNAPSHOT</version>
+        </dependency>
 	</dependencies>
 </project>
