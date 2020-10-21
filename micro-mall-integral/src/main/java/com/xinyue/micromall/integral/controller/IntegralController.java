@@ -38,8 +38,8 @@ public class IntegralController {
 	public String increa(@RequestParam Map<String, Object> param) {
 		// 给用户增加积分
 		String userId = param.get("userId") != null ? param.get("userId").toString() : null;
-		Integer increa = param.get("increa") != null ? StringUtils.isNotBlank(param.get("increa").toString())
-				? Integer.valueOf(param.get("increa").toString()) : null : null;
+		Integer increa = param.get("integral") != null ? StringUtils.isNotBlank(param.get("integral").toString())
+				? Integer.valueOf(param.get("integral").toString()) : null : null;
 		System.out.println("userId=" + userId + ",increa=" + increa);
 		return "success";
 	}

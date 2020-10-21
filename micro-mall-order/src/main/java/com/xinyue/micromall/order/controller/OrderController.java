@@ -25,7 +25,7 @@ import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.client.RestTemplate;
 
 import com.netflix.hystrix.contrib.javanica.annotation.HystrixCommand;
-import com.xinyue.micromall.spi.integral.service.IntegralService;
+import com.xinyue.micromall.order.interfaces.IntegralService2;
 
 /**
  * @ClassName: OrderController
@@ -45,9 +45,9 @@ public class OrderController {
 
 	@Autowired
 	private RestTemplate restTemplate;
-	
+
 	@Autowired
-	private IntegralService integralService;
+	private IntegralService2 integralService2;
 
 	@GetMapping("/getServiceList")
 	public List<ServiceInstance> getServiceList() {
@@ -74,8 +74,7 @@ public class OrderController {
 	public String createOrderFallback(Map<String, Object> param) {
 		return "error";
 	}
-	
-	
+
 	@RequestMapping(value = "/createOrder", method = RequestMethod.GET)
 	@HystrixCommand(fallbackMethod = "createOrderFallback")
 	public String createOrder(@RequestParam Map<String, Object> param) {
@@ -87,15 +86,10 @@ public class OrderController {
 		Map<String, Object> params = new HashMap<>();
 		params.put("userId", userId);
 		params.put("integral", integral);
-		
-		String b=integralService.increa(params);
+
+		String b = integralService2.increa(params);
 		System.out.println(b);
 		return "success";
 	}
-	
-	
-	
-	
-	
 
 }

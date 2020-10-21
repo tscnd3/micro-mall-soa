@@ -25,6 +25,7 @@
 		<maven-jar-plugin.version>3.1.1</maven-jar-plugin.version> <!-- 指定 maven插件版本 -->
 		<com.alibaba.cloud>2.1.0.RELEASE</com.alibaba.cloud>
 		<nacos.config>0.2.7</nacos.config>
+		<org.springframework.cloud>2.1.2.RELEASE</org.springframework.cloud>
   </properties>	
   
 	<dependencyManagement>
@@ -34,6 +35,13 @@
 	    		<artifactId>spring-cloud-starter-alibaba-nacos-discovery</artifactId>
 				<version>${com.alibaba.cloud}</version>
 			</dependency>
+			
+			<dependency>
+				<groupId>org.springframework.cloud</groupId>
+				<artifactId>spring-cloud-starter-gateway</artifactId>
+				<version>${org.springframework.cloud}</version>
+			</dependency>
+			
 			<dependency>
 				<groupId>com.alibaba.cloud</groupId>
 	    		<artifactId>spring-cloud-starter-alibaba-sentinel</artifactId>

@@ -17,6 +17,7 @@ import org.springframework.cloud.client.discovery.EnableDiscoveryClient;
 import org.springframework.cloud.client.loadbalancer.LoadBalanced;
 import org.springframework.cloud.openfeign.EnableFeignClients;
 import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.ComponentScan;
 import org.springframework.web.client.RestTemplate;
 
 import com.alibaba.nacos.spring.context.annotation.config.NacosPropertySource;
@@ -37,6 +38,7 @@ import com.alibaba.nacos.spring.context.annotation.config.NacosPropertySource;
 // 开启断路器
 @EnableCircuitBreaker
 @NacosPropertySource(dataId = "micro-mall-order", autoRefreshed = true, groupId = "micromall")
+@ComponentScan(basePackages = { "com.xinyue.micromall.*" })
 public class OrderApplication {
 
 	public static void main(String[] args) {
