@@ -76,7 +76,6 @@ public class OrderController {
 	}
 
 	@RequestMapping(value = "/createOrder", method = RequestMethod.GET)
-	@HystrixCommand(fallbackMethod = "createOrderFallback")
 	public String createOrder(@RequestParam Map<String, Object> param) {
 		// 1.根据用户信息商品信息产生订单。
 		// 2.扣除库存商品数量
@@ -86,7 +85,6 @@ public class OrderController {
 		Map<String, Object> params = new HashMap<>();
 		params.put("userId", userId);
 		params.put("integral", integral);
-
 		String b = integralService2.increa(params);
 		System.out.println(b);
 		return "success";
