@@ -7,10 +7,6 @@
   </parent>
   <artifactId>micro-mall-order</artifactId>
   
-   <properties>
-  	<spring-cloud-openfeign.version>2.1.0.RELEASE</spring-cloud-openfeign.version>
-  </properties>
-  
     <dependencies>
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
@@ -45,7 +41,6 @@
 		 <dependency>
             <groupId>org.springframework.cloud</groupId>
             <artifactId>spring-cloud-starter-openfeign</artifactId>
-            <version>${spring-cloud-openfeign.version}</version>
         </dependency>
         
         
@@ -53,7 +48,6 @@
         <dependency>
 			<groupId>org.springframework.cloud</groupId>
 		    <artifactId>spring-cloud-starter-netflix-hystrix</artifactId>
-		    <version>2.1.0.RELEASE</version>
 		</dependency>
 		<!-- 集成 nacos-config -->
 		<dependency>
