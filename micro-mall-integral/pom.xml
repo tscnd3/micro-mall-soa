@@ -6,11 +6,7 @@
     <version>0.0.1-SNAPSHOT</version>
   </parent>
   <artifactId>micro-mall-integral</artifactId>
-  
-  <properties>
-  	<spring-cloud-openfeign.version>2.1.0.RELEASE</spring-cloud-openfeign.version>
-  </properties>
-  
+   
     <dependencies>
 		<dependency>
 			<groupId>org.springframework.boot</groupId>

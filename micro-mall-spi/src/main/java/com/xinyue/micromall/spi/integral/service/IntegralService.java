@@ -9,10 +9,10 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 import com.xinyue.micromall.spi.integral.bean.IntegralHystrixImpl;
 
-@FeignClient(value="micro-mall-integral",fallback=IntegralHystrixImpl.class)
+@FeignClient(value = "micro-mall-integral", fallback = IntegralHystrixImpl.class)
 public interface IntegralService {
-	
-	@RequestMapping(value = "/increa", method = RequestMethod.GET)
-	public String increa(@RequestParam Map<String, Object> param); 
+
+	@RequestMapping(value = "/integral/increa", method = RequestMethod.GET)
+	public String increa(@RequestParam Map<String, Object> param);
 
 }
