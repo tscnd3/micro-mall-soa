@@ -47,4 +47,11 @@ public class IntegralController {
 	public String increaFallback() {
 		return "error";
 	}
+
+	@RequestMapping(value = "/add", method = RequestMethod.GET)
+	public Integer add(@RequestParam Integer a, @RequestParam Integer b) {
+		Integer r = a + b;
+		return r;
+	}
+
 }

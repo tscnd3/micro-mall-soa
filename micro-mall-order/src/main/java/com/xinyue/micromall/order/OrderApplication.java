@@ -34,7 +34,7 @@ import com.alibaba.nacos.spring.context.annotation.config.NacosPropertySource;
 @SpringBootApplication
 @EnableDiscoveryClient
 // feign处理ribbno可以你像本地方法调用服务
-@EnableFeignClients
+@EnableFeignClients(basePackages = { "com.xinyue.micromall.*" })
 // 开启断路器
 @EnableCircuitBreaker
 @NacosPropertySource(dataId = "micro-mall-order", autoRefreshed = true, groupId = "micromall")
