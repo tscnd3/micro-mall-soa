@@ -1,0 +1,181 @@
+----------------mongodb------------------
+-- 添加唯一索引
+db.getCollection('im:group:join_exit_record').ensureIndex({userId: 1, bType: 1},{unique: true,name:"userId_bType_idx"});
+
+-- 删除集合索引
+db.getCollection('im_ditie_red_record').dropIndex("userId_idx");
+
+-- 添加字段
+db.getCollection('im:group:join_exit_record').update({},{$set: {exitNum:0}}, {multi: true});
+
+-- 删除字段
+db.getCollection('im:group:join_exit_record').update({},{$unset:{'exitNum':''}},false, true)
+
+--聚合查询------------------------------
+  db.getCollection('coupon_base').aggregate(
+  {
+	"$lookup": {
+		"from": "coupon_temp",
+		"localField": "tempId",
+		"foreignField": "_id",
+		"as": "query_result"
+	}
+},{"$unwind":"$query_result"}, {
+	"$match": {
+		"ownerUid": 1333653
+		
+		
+	}
+},
+{
+	"$group": {
+		"_id": {
+			"status": "$status",
+                        "tempId": "$tempId"
+		},
+		"num": {
+			"$sum": 1
+		},
+		"ownerUid": {
+			"$first": "$ownerUid"
+		},
+		"status": {
+			"$first": "$status"
+		},
+		"title": {
+			"$first": "$query_result.title"
+		},
+		"sourceId": {
+			"$first": "$query_result.sourceId"
+		},
+		"toCouponUrl": {
+			"$first": "$query_result.toCouponUrl"
+		},
+		"increaseStatus": {
+			"$first": "$query_result.increaseStatus"
+		}
+	}
+}, {
+	"$project": {
+		"_id": 0,
+		"num": 1,
+		"ownerUid": 1,
+		"status": 1,
+		"title": 1,
+		"sourceId": 1,
+		"toCouponUrl": 1,
+		"increaseStatus": 1
+	}
+},
+{"$match": {"increaseStatus": 1 }}
+);
+
+db.getCollection('coupon_base').aggregate(
+  {
+	"$lookup": {
+		"from": "coupon_temp",
+		"localField": "tempId",
+		"foreignField": "_id",
+		"as": "query_result"
+	}
+},{"$unwind":"$query_result"}, 
+{
+    "$match": {
+		"ownerUid": 15534827	
+	}
+},
+{
+	"$group": {
+		"_id": {
+			"status": "$status",
+                        "tempId":"$tempId"
+		},
+		"num": {
+			"$sum": 1
+		},
+                "tempId":{
+                        "$first":"$tempId"
+                },
+		"ownerUid": {
+			"$first": "$ownerUid"
+		},
+		"status": {
+			"$first": "$status"
+		},
+		"title": {
+			"$first": "$query_result.title"
+		},
+		"sourceId": {
+			"$first": "$query_result.sourceId"
+		},
+		"toCouponUrl": {
+			"$first": "$query_result.toCouponUrl"
+		},
+		"increaseStatus": {
+			"$first": "$query_result.increaseStatus"
+		}
+	}
+}, {
+	"$project": {
+		"_id": 0,
+		"num": 1,
+                "tempId":1,
+		"ownerUid": 1,
+		"status": 1,
+		"title": 1,
+		"sourceId": 1,
+		"toCouponUrl": 1,
+		"increaseStatus": 1
+	}
+},
+{"$match": {"increaseStatus": 1 }
+},{"$sort":{"status":1}}
+, {
+	"$limit": 5
+}, {
+	"$skip": 0
+}
+);
+
+
+--------------------------------------mysql-----------------------------------------------
+ALTER TABLE im_question_share ADD COLUMN  sms_code VARCHAR(64) COMMENT '短信唯一编号' after order_no;
+
+添加唯一索引
+ALTER TABLE im_question_share ADD CONSTRAINT sms_code_idx UNIQUE (sms_code);
+
+#添加服务群自增游标
+INSERT INTO im_group_name_cursor(name_prefix,last_index,b_type,lord_user_id,extend_json)VALUES('公司研报服务群',1,'epssg',1333653,NULL);
+
+#添加业务群服务标识
+INSERT INTO im_btype(b_type,icon,mark,`desc`,mark_name,client_id,service_name,service_id)
+VALUES('epssg','http://alcache.idianyou.cn/dianyou/data/dianyou/img/20190723/ff8080816c17013c016c1cf2c9ff004f.png','服','公司研报服务群',NULL,NULL,NULL,NULL);
+
+1.添加PRIMARY KEY（主键索引） 
+mysql>ALTER TABLE `table_name` ADD PRIMARY KEY ( `column` )
+
+2.添加UNIQUE(唯一索引) 
+mysql>ALTER TABLE `table_name` ADD UNIQUE ( `column` ) 
+
+3.添加INDEX(普通索引) 
+mysql>ALTER TABLE `table_name` ADD INDEX index_name ( `column` ) 
+
+4.添加FULLTEXT(全文索引) 
+mysql>ALTER TABLE `table_name` ADD FULLTEXT ( `column`) 
+
+5.添加多列索引 
+mysql>ALTER TABLE `table_name` ADD INDEX index_name ( `column1`, `column2`, `column3` )
+
+
+
+
+
+
+
+
+
+
+
+
+
+
